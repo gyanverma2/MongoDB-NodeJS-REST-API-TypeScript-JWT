@@ -18,8 +18,12 @@ import { ITokenResponse } from './model';
 export async function login(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
         const user = await AuthService.generateToken(req.body);
-
-        const token: string = jwt.sign({ user: user }, app.get('secret'), {
+        let userJson = user;
+        if (user && user.password) {
+            userJson = JSON.parse(JSON.stringify(user));
+            delete userJson.password;
+        }
+        const token: string = jwt.sign({ user: userJson }, app.get('secret'), {
             expiresIn: '60m',
         });
 
