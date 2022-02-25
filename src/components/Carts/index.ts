@@ -13,11 +13,15 @@ import { RequestWithUser } from '@/config/server';
  */
 export async function findAll(req: RequestWithUser, res: Response, next: NextFunction): Promise<void> {
     try {
-        const pageNo = req.query.pageNo ? parseInt(req.query.pageNo.toString()) - 1 : 0;
-        const pageSize = req.query.pageSize ? parseInt(req.query.pageSize.toString()) : 20;
-        const carts: ICartsModel[] = await CartsService.findAll(pageNo,pageSize);
+        if (req.user.user) { //request already have user as token object, in middleware it converting to actual object and all the property is accessible via req.user.user
+            const pageNo = req.query.pageNo ? parseInt(req.query.pageNo.toString()) - 1 : 0;
+            const pageSize = req.query.pageSize ? parseInt(req.query.pageSize.toString()) : 20;
+            const carts: ICartsModel[] = await CartsService.findAll(req.user.user._id, pageNo, pageSize);
 
-        res.status(200).json(carts);
+            res.status(200).json(carts);
+        } else {
+            res.status(200).json([]);
+        }
     } catch (error) {
         next(new HttpError(error.message.status, error.message));
     }
@@ -84,11 +88,11 @@ export async function create(req: RequestWithUser, res: Response, next: NextFunc
  */
 export async function update(req: RequestWithUser, res: Response, next: NextFunction): Promise<void> {
     try {
-        const carts = await CartsService.update(req.params.id,req.body);
-        if(carts>0){
-        res.status(201).json('Updated successfully');
-        }else{
-        res.status(400).json('Failed to update');
+        const carts = await CartsService.update(req.params.id, req.body);
+        if (carts > 0) {
+            res.status(201).json('Updated successfully');
+        } else {
+            res.status(400).json('Failed to update');
         }
     } catch (error) {
         next(new HttpError(error.message.status, error.message));

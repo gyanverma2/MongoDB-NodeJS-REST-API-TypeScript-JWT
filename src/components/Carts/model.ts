@@ -1,7 +1,7 @@
 import * as connections from '@/config/connection/connection';
 import { Document, Schema } from 'mongoose';
 import { NextFunction } from 'express';
-import {ObjectId, Types} from 'mongoose'
+import { ObjectId, Types } from 'mongoose'
 
 
 
@@ -10,10 +10,10 @@ import {ObjectId, Types} from 'mongoose'
  * @interface ICartsRequest
  */
 export interface ICartsRequest {
-    customerId:ObjectId,
-productId:ObjectId,
-quantity:Number,
-sessionId:ObjectId,
+    customerId: ObjectId,
+    productId: ObjectId,
+    quantity: Number,
+    sessionId: ObjectId,
 }
 
 /**
@@ -22,10 +22,10 @@ sessionId:ObjectId,
  * @extends {Document}
  */
 export interface ICartsModel extends Document {
-   customerId:ObjectId,
-productId:ObjectId,
-quantity:Number,
-sessionId:ObjectId,
+    customerId: ObjectId,
+    productId: ObjectId,
+    quantity: Number,
+    sessionId: ObjectId,
 }
 
 
@@ -58,10 +58,10 @@ sessionId:ObjectId,
  */
 const CartsSchema: Schema = new Schema(
     {
-       customerId:{type: Types.ObjectId, ref: 'customers',required: true,},
-productId:{type: Types.ObjectId, ref: 'products',required: true,},
-quantity:Number,
-sessionId:Types.ObjectId,
+        customerId: { type: Types.ObjectId, ref: 'customers', required: true, },
+        productId: { type: Types.ObjectId, ref: 'products', required: true, },
+        quantity: Number,
+        sessionId: Types.ObjectId,
     },
     {
         collection: 'carts',

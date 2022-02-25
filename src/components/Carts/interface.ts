@@ -1,4 +1,5 @@
 import { ISearchParamRequest } from '@/utils/SearchHelper';
+import { ObjectId } from 'mongoose';
 import { ICartsModel } from './model';
 
 /**
@@ -10,7 +11,7 @@ export interface ICartsService {
      * @returns {Promise<ICartsModel[]>}
      * @memberof ICartsService
      */
-    findAll(pageNo:number,pageSize:number): Promise<ICartsModel[]>;
+    findAll(customerId:ObjectId,pageNo:number,pageSize:number): Promise<ICartsModel[]>;
 
     /**
      * @param {ISearchParamRequest} param

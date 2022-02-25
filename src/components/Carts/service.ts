@@ -4,6 +4,7 @@ import CartsValidation from './validation';
 import { ICartsService } from './interface';
 import { Types } from 'mongoose';
 import { GetSearchQuery, ISearchParamRequest } from '@/utils/SearchHelper';
+import { ObjectId } from 'mongoose';
 
 /**
  * @export
@@ -14,10 +15,10 @@ const CartsService: ICartsService = {
      * @returns {Promise < ICartsModel[] >}
      * @memberof CartsService
      */
-    async findAll(pageNo:number,pageSize:number): Promise<ICartsModel[]> {
+    async findAll(customerId:ObjectId,pageNo:number,pageSize:number): Promise<ICartsModel[]> {
         try {
             const skip = pageNo * pageSize;
-            return await CartsModel.find({}).skip(skip).limit(pageSize);
+            return await CartsModel.find({customerId:customerId}).skip(skip).limit(pageSize);
         } catch (error) {
             throw new Error(error.message);
         }
