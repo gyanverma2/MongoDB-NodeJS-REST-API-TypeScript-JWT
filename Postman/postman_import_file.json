@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "07db9c26-f0fe-41e6-8038-6e6291916925",
+		"name": "eshopAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+  "item": [
+    {
+			"name": "TokenGenerator",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "73739e23-fb26-474e-b202-7ea845e06c55",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var token = jsonData.accessToken;\r",
+							"postman.setEnvironmentVariable(\"token\", token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\":\"admin\",\n\"password\":\"admin123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{DEVServerURL}}",
+					"host": [
+						"{{DEVServerURL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "File Upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "files",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{DEVServerURL}}/{{versionKey}}/file/upload",
+					"host": [
+						"{{DEVServerURL}}"
+					],
+					"path": [
+						"{{versionKey}}",
+						"file",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read File",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{DEVServerURL}}/{{versionKey}}/file/read/{name}",
+					"host": [
+						"{{DEVServerURL}}"
+					],
+					"path": [
+						"{{versionKey}}",
+						"file",
+						"read",
+						"kzoot1ay_error.PNG"
+					]
+				}
+			},
+			"response": []
+		},
+    {"name": "Carts - Add", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"customerId\":\"\",\"productId\":\"\",\"quantity\":\"\",\"sessionId\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","carts"] } }, "response": [] }
+,{"name": "Carts - Search", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"orAnd\":\"\",\"params\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","carts","search?pageNo=1&pageSize=30"] } }, "response": [] }
+,{"name": "Carts - Update Only Passed Columns", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "PATCH", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"customerId\":\"\",\"productId\":\"\",\"quantity\":\"\",\"sessionId\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","carts","${id}"] } }, "response": [] }
+,{"name": "Carts - GetAll", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "GET", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","carts","?pageNo=1&pageSize=30"] } }, "response": [] }
+,{"name": "Carts - GetById", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "GET", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","carts","${id}"] } }, "response": [] }
+,{"name": "Carts - Delete", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "DELETE", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"customerId\":\"\",\"productId\":\"\",\"quantity\":\"\",\"sessionId\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","carts","${id}"] } }, "response": [] }
+,{"name": "Customers - Add", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"name\":\"\",\"email\":\"\",\"password\":\"\",\"profilePic\":\"\",\"city\":\"\",\"mobile\":\"\",\"lastLogin\":\"\",\"address\":\"\",\"deviceToken\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","customers"] } }, "response": [] }
+,{"name": "Customers - Search", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"orAnd\":\"\",\"params\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","customers","search?pageNo=1&pageSize=30"] } }, "response": [] }
+,{"name": "Customers - Update Only Passed Columns", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "PATCH", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"name\":\"\",\"email\":\"\",\"password\":\"\",\"profilePic\":\"\",\"city\":\"\",\"mobile\":\"\",\"lastLogin\":\"\",\"address\":\"\",\"deviceToken\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","customers","${id}"] } }, "response": [] }
+,{"name": "Customers - GetAll", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "GET", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","customers","?pageNo=1&pageSize=30"] } }, "response": [] }
+,{"name": "Customers - GetById", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "GET", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","customers","${id}"] } }, "response": [] }
+,{"name": "Customers - Delete", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "DELETE", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"name\":\"\",\"email\":\"\",\"password\":\"\",\"profilePic\":\"\",\"city\":\"\",\"mobile\":\"\",\"lastLogin\":\"\",\"address\":\"\",\"deviceToken\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","customers","${id}"] } }, "response": [] }
+,{"name": "Orders - Add", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"productId\":\"\",\"customerId\":\"\",\"quantity\":\"\",\"isPaid\":\"\",\"amountPaid\":\"\",\"address\":\"\",\"deliveryStatus\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","orders"] } }, "response": [] }
+,{"name": "Orders - Search", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"orAnd\":\"\",\"params\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","orders","search?pageNo=1&pageSize=30"] } }, "response": [] }
+,{"name": "Orders - Update Only Passed Columns", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "PATCH", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"productId\":\"\",\"customerId\":\"\",\"quantity\":\"\",\"isPaid\":\"\",\"amountPaid\":\"\",\"address\":\"\",\"deliveryStatus\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","orders","${id}"] } }, "response": [] }
+,{"name": "Orders - GetAll", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "GET", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","orders","?pageNo=1&pageSize=30"] } }, "response": [] }
+,{"name": "Orders - GetById", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "GET", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","orders","${id}"] } }, "response": [] }
+,{"name": "Orders - Delete", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "DELETE", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"productId\":\"\",\"customerId\":\"\",\"quantity\":\"\",\"isPaid\":\"\",\"amountPaid\":\"\",\"address\":\"\",\"deliveryStatus\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","orders","${id}"] } }, "response": [] }
+,{"name": "Products - Add", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"name\":\"\",\"price\":\"\",\"image\":\"\",\"isActive\":\"\",\"description\":\"\",\"stock\":\"\",\"SKU\":\"\",\"Manufacturer\":\"\",\"Brand\":\"\",\"FeatureId\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","products"] } }, "response": [] }
+,{"name": "Products - Search", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"orAnd\":\"\",\"params\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","products","search?pageNo=1&pageSize=30"] } }, "response": [] }
+,{"name": "Products - Update Only Passed Columns", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "PATCH", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"name\":\"\",\"price\":\"\",\"image\":\"\",\"isActive\":\"\",\"description\":\"\",\"stock\":\"\",\"SKU\":\"\",\"Manufacturer\":\"\",\"Brand\":\"\",\"FeatureId\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","products","${id}"] } }, "response": [] }
+,{"name": "Products - GetAll", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "GET", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","products","?pageNo=1&pageSize=30"] } }, "response": [] }
+,{"name": "Products - GetById", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "GET", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","products","${id}"] } }, "response": [] }
+,{"name": "Products - Delete", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "DELETE", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"name\":\"\",\"price\":\"\",\"image\":\"\",\"isActive\":\"\",\"description\":\"\",\"stock\":\"\",\"SKU\":\"\",\"Manufacturer\":\"\",\"Brand\":\"\",\"FeatureId\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","products","${id}"] } }, "response": [] }
+,{"name": "Product_Features - Add", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"color\":\"\",\"size\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","product_features"] } }, "response": [] }
+,{"name": "Product_Features - Search", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "POST", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"orAnd\":\"\",\"params\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","product_features","search?pageNo=1&pageSize=30"] } }, "response": [] }
+,{"name": "Product_Features - Update Only Passed Columns", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "PATCH", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"color\":\"\",\"size\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","product_features","${id}"] } }, "response": [] }
+,{"name": "Product_Features - GetAll", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "GET", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","product_features","?pageNo=1&pageSize=30"] } }, "response": [] }
+,{"name": "Product_Features - GetById", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "GET", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","product_features","${id}"] } }, "response": [] }
+,{"name": "Product_Features - Delete", "request":{ "auth":{ "type": "bearer", "bearer": [ { "key": "token", "value": "{{token}}", "type": "string"}]},"method": "DELETE", "header": [ { "key": "Content-Type", "name": "Content-Type", "value": "application/json", "type": "text" } ], "body": { "mode": "raw", "raw": "{\"color\":\"\",\"size\":\"\"}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{DEVServerURL}}", "host": [ "{{DEVServerURL}}" ], "path": ["{{versionKey}}","product_features","${id}"] } }, "response": [] }
+
+  ],
+	"protocolProfileBehavior": {}
+}
