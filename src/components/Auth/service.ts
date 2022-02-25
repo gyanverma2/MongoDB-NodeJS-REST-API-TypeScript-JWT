@@ -27,11 +27,11 @@ const AuthService: IAuthService = {
             //Fetch from collection based on username password
             const user: ICustomersModel = await CustomersModel.findOne(
 
-{
-email: body.username,
-password: body.password //do encryption check like md5(body.password)
-});
-           
+                {
+                    email: body.username,
+                    password: body.password //do encryption check like md5(body.password)
+                });
+
 
             if (user != null) {
                 return user;
