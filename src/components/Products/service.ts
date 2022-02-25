@@ -17,7 +17,7 @@ const ProductsService: IProductsService = {
     async findAll(pageNo:number,pageSize:number): Promise<IProductsModel[]> {
         try {
             const skip = pageNo * pageSize;
-            return await ProductsModel.find({}).skip(skip).limit(pageSize);
+            return await ProductsModel.find({}).populate({ path: 'FeatureId', model: Product_FeaturesModel}).skip(skip).limit(pageSize);
         } catch (error) {
             throw new Error(error.message);
         }
@@ -141,4 +141,8 @@ const ProductsService: IProductsService = {
 };
 
 export default ProductsService;
+
+function Product_FeaturesModel(arg0: string, Product_FeaturesModel: any) {
+    throw new Error('Function not implemented.');
+}
 
