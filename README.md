@@ -47,7 +47,7 @@ Create a mongoDB connected NodeJS REST API using TypeScript With JWT Authenticat
 # Youtube Videos
 - [Tool Demo Video](https://www.youtube.com/watch?v=4R8oJVbv7KU)
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=4R8oJVbv7KU" target="_blank"><img src="http://img.youtube.com/vi/4R8oJVbv7KU/0.jpg" alt="Video - Automatic MongoDB NodeJS REST API Generator + TypeScript + JWT Auth + Swagger + Postman" width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=4R8oJVbv7KU" target="_blank"><img src="http://img.youtube.com/vi/4R8oJVbv7KU/0.jpg" alt="Video - Automatic MongoDB NodeJS REST API Generator + TypeScript + JWT Auth + Swagger + Postman" width="400" height="400" border="0" /></a>
 
 ### [Dowload From CodeCanyon](https://codecanyon.net/item/100-automatic-mongodb-rest-api-generator-nodejs-typescript-rest-api-jwt-auth-swagger/35214206)
 
